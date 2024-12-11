@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     Vector2 respawnPosition;
     [SerializeField]
     private bool canMove;
+    private bool openedMenu;
+    [SerializeField]
+    private GameObject footstepsAudioSource;
 
     void Start()
     {
@@ -31,6 +34,10 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
         targetVelocity = direction * speed;
+        if(direction != new Vector2(0, 0))
+        {
+            footstepsAudioSource.GetComponent<AudioSource>().Play();
+        }
     }
 
     void FixedUpdate()
@@ -80,5 +87,15 @@ public class Player : MonoBehaviour
     public void SetPlayerMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public bool GetOpenedMenu()
+    {
+        return openedMenu;
+    }
+
+    public void SetOpenedMenu(bool openedMenu)
+    {
+        this.openedMenu = openedMenu;
     }
 }

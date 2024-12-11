@@ -6,7 +6,11 @@ public class KillCharacter : MonoBehaviour
 {
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponentInChildren<PlayerInventoryManager>().DeleteRandomIngredient();
-        collision.GetComponent<Player>().Respawn();
+        if (collision.name is "Player")
+        {
+            collision.GetComponentInChildren<PlayerInventoryManager>().DeleteRandomIngredient();
+            collision.GetComponent<Player>().Respawn();
+            transform.parent.GetChild(1).GetComponent<ChaseCharacter>().ResetToInitialPosition();
+        }
     }
 }

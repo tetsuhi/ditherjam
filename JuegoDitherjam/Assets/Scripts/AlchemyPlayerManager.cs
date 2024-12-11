@@ -5,16 +5,17 @@ using UnityEngine;
 public class AlchemyPlayerManager : MonoBehaviour
 {
     [SerializeField]
-    private int fluid = 0;
+    private bool fluid;
     private Player player;
-    private PlayerInventoryManager playerInventory;
+    //private PlayerInventoryManager playerInventory;
     public GameObject alchemyMenu;
+    public GameObject grimoireMenu;
     public UIInventoryManager inventoryUI;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        playerInventory = player.GetComponentInChildren<PlayerInventoryManager>();
+        //playerInventory = player.GetComponentInChildren<PlayerInventoryManager>();
         inventoryUI = alchemyMenu.GetComponentInChildren<UIInventoryManager>();
     }
 
@@ -25,24 +26,25 @@ public class AlchemyPlayerManager : MonoBehaviour
 
     private void OpenAlchemyMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && player.GetPlayerMove())
+        if (Input.GetKeyDown(KeyCode.E) && player.GetPlayerMove() && !grimoireMenu.activeInHierarchy)
         {
             alchemyMenu.SetActive(!alchemyMenu.activeInHierarchy);
-            inventoryUI.DrawInventory(playerInventory.GetInventory());
+            player.SetOpenedMenu(alchemyMenu.activeInHierarchy);
+            inventoryUI.DrawInventory(player.GetComponentInChildren<PlayerInventoryManager>().GetInventory());
         }
     }
 
-    public void AddFluid(int quantity)
+    public void AddFluid()
     {
-        fluid += quantity;
+        fluid = true;
     }
 
-    public void SpendFluid(int cost)
+    public void SpendFluid()
     {
-        fluid -= cost;
+        fluid = false;
     }
 
-    public int GetFluid()
+    public bool GetFluid()
     {
         return fluid;
     }

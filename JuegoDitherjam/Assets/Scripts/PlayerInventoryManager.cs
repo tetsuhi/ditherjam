@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInventoryManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Ingredient> inventory = new List<Ingredient>();
+    private List<GameObject> inventory = new List<GameObject>();
 
     public void DeleteRandomIngredient()
     {
@@ -16,7 +16,7 @@ public class PlayerInventoryManager : MonoBehaviour
         }
     }
 
-    public Ingredient GetFirstItem()
+    public GameObject GetFirstItem()
     {
         if (inventory.Count <= 0)
         {
@@ -24,9 +24,9 @@ public class PlayerInventoryManager : MonoBehaviour
         }
         else
         {
-            Ingredient firstIngredient = inventory[0];
-            inventory.RemoveAt(0);
-            return firstIngredient;
+            //GameObject firstIngredient = inventory[0];
+            //inventory.RemoveAt(0);
+            return inventory[0];
         }
     }
 
@@ -34,7 +34,7 @@ public class PlayerInventoryManager : MonoBehaviour
     {
         if (index >= 0 && index < inventory.Count)
         {
-            return inventory[index].GetSprite();
+            return inventory[index].GetComponent<Ingredient>().GetSprite().sprite;
         }
         else
         {
@@ -42,13 +42,44 @@ public class PlayerInventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(Ingredient newIngredient)
+    public Sprite GetItemTattooSprite(int index)
+    {
+        if (index >= 0 && index < inventory.Count)
+        {
+            return inventory[index].GetComponent<Ingredient>().GetTattoo().sprite;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void AddToInventory(GameObject newIngredient)
     {
         inventory.Add(newIngredient);
     }
     
-    public List<Ingredient> GetInventory()
+    public List<GameObject> GetInventory()
     {
         return inventory;
+    }
+
+    public void DeleteIngredientPosition(int index)
+    {
+        inventory.RemoveAt(index);
+    }
+
+    public int FindItemByName(string ingredientName)
+    {
+        int index = 0;
+        while (index < inventory.Count)
+        {
+            if (inventory[index].GetComponent<Ingredient>().GetName() == ingredientName)
+            {
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
 }

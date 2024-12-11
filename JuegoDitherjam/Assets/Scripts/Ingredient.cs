@@ -1,29 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ingredient : MonoBehaviour
 {
     [SerializeField]
     private string ingredientName;
     [SerializeField]
-    private Sprite ingredientTexture;
+    private Image ingredientTexture;
+    [SerializeField]
+    private GameObject ingredientPrefab;
+    [SerializeField]
+    private Image tattooLinked;
 
-    //public Ingredient(string ingredientName, Texture2D ingredientTexture)
-    //{
-    //    this.ingredientName = ingredientName;
-    //    this.ingredientTexture = ingredientTexture;
-    //}
-    //private void Start()
-    //{
-    //    GetComponent<SpriteRenderer>().sprite = ingredientTexture;
-    //}
-    public Sprite GetSprite()
+    public void SetSprite(Image ingredientTexture)
+    {
+        this.ingredientTexture = ingredientTexture;
+    }
+
+    public Image GetSprite()
     {
         return ingredientTexture;
     }
+        public void SetName(string ingredientName)
+    {
+        this.ingredientName = ingredientName;
+    }
+
     public string GetName()
     {
         return ingredientName;
+    }
+
+    public void SetPrefab(GameObject ingredientPrefab)
+    {
+        this.ingredientPrefab = ingredientPrefab;
+    }
+
+    public GameObject GetPrefab()
+    {
+        return ingredientPrefab;
+    }
+
+    public void SetTattoo(Image tattooLinked)
+    {
+        this.tattooLinked = tattooLinked;
+    }
+
+    public Image GetTattoo()
+    {
+        return tattooLinked;
     }
 }

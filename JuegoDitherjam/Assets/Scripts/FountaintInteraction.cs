@@ -7,12 +7,11 @@ public class FountaintInteraction : MonoBehaviour
     private const float BASE_TIME = 60.0f;
 
     [SerializeField]
-    private int fluidQuantity = 10;
-    [SerializeField]
     private GameObject menuIndicator;
     private GameObject player;
     [SerializeField]
     private float targetTime = BASE_TIME;
+    [SerializeField]
     private bool canReceiveFluid = true;
 
     void Start()
@@ -44,11 +43,11 @@ public class FountaintInteraction : MonoBehaviour
 
     private void ReceiveFluid()
     {
-        if (Input.GetKeyDown(KeyCode.E) && menuIndicator.activeInHierarchy && canReceiveFluid)
+        if (Input.GetKeyDown(KeyCode.F) && menuIndicator.activeInHierarchy && canReceiveFluid)
         {
             canReceiveFluid = false;
             RestartTimer();
-            player.GetComponentInChildren<AlchemyPlayerManager>().AddFluid(fluidQuantity);
+            player.GetComponentInChildren<AlchemyPlayerManager>().AddFluid();
         }
     }
 

@@ -9,13 +9,15 @@ public class InventorySlot : MonoBehaviour
 {
     public Image ingredientIcon;
     public string ingredientName;
+    public GameObject ingredientPrefab;
+    public int itemListPosition;
 
     public void ClearSlot()
     {
         ingredientIcon.enabled = false;
     }
 
-    public void DrawSlot(Ingredient ingredient)
+    public void DrawSlot(GameObject ingredient, int position)
     {
         if (ingredient == null)
         {
@@ -23,14 +25,21 @@ public class InventorySlot : MonoBehaviour
             return;
         }
         ingredientIcon.enabled = true;
-        ingredientIcon.sprite = ingredient.GetSprite();
-        ingredientName = ingredient.GetName();
+        ingredientIcon.sprite = ingredient.GetComponent<Ingredient>().GetSprite().sprite;
+        ingredientName = ingredient.GetComponent<Ingredient>().GetName();
+        ingredientPrefab = ingredient.GetComponent<Ingredient>().GetPrefab();
+        itemListPosition = position;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        transform.parent.GetComponent<UIInventoryManager>()
-            .SendToAlchemy(ingredientIcon, ingredientName);
+        if(ingredientName != "")
+        {
+            transform.parent.GetComponent<UIInventoryManager>()
+            .SendToAlchemy(ingredientIcon, ingredientName, ingredientPrefab);
+            transform.parent.GetComponent<UIInventoryManager>()
+                .DeleteIngredientInInventory(itemListPosition);
+        }
     }
 
 }

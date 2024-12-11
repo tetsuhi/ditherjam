@@ -15,9 +15,17 @@ public class AlchemyIngredientSlot : MonoBehaviour
 
     private bool ingredientAdded;
     private Image ingredientIcon;
-    private string ingredientName;
     [SerializeField]
-    //private AlchemyPosition ingredientPosition;
+    private string ingredientName;
+    public GameObject inventoryManager;
+    private UIInventoryManager uIInventoryManager;
+    [SerializeField]
+    private GameObject ingredientPrefab;
+
+    void Start()
+    {
+        uIInventoryManager = inventoryManager.GetComponent<UIInventoryManager>();
+    }
 
     public void SetImage(Image ingredientIcon)
     {
@@ -34,13 +42,31 @@ public class AlchemyIngredientSlot : MonoBehaviour
         this.ingredientAdded = ingredientAdded;
     }
 
+    public void SetPrefab(GameObject ingredientPrefab)
+    {
+        this.ingredientPrefab = ingredientPrefab;
+    }
+
     public bool GetIngredientAdded()
     {
         return ingredientAdded;
     }
 
+    public string GetIngredientName()
+    {
+        return ingredientName;
+    }
+
+    void ResetSlot()
+    {
+        transform.GetChild(0).GetComponent<Image>().enabled = false;
+        ingredientName = "";
+        ingredientAdded = false;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("me han clickado para quitarme!");
+        uIInventoryManager.RestoreIngredient(ingredientPrefab);
+        ResetSlot();
     }
 }
