@@ -13,6 +13,7 @@ public class FountaintInteraction : MonoBehaviour
     private float targetTime = BASE_TIME;
     [SerializeField]
     private bool canReceiveFluid = true;
+    private bool playerInRange;
 
     void Start()
     {
@@ -34,6 +35,10 @@ public class FountaintInteraction : MonoBehaviour
     private void TimerEnded()
     {
         canReceiveFluid = true;
+        if (playerInRange)
+        {
+            menuIndicator.SetActive(true);
+        }
     }
 
     private void RestartTimer()
@@ -45,7 +50,8 @@ public class FountaintInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && menuIndicator.activeInHierarchy && canReceiveFluid)
         {
-            transform.GetChild(0).GetComponent<AudioSource>().Play();
+            transform.GetChild(1).GetComponent<AudioSource>().Play();
+            menuIndicator.SetActive(false);
             canReceiveFluid = false;
             RestartTimer();
             player.GetComponentInChildren<AlchemyPlayerManager>().AddFluid();
@@ -54,11 +60,16 @@ public class FountaintInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        menuIndicator.SetActive(true);
+        if (canReceiveFluid)
+        {
+            menuIndicator.SetActive(true);
+        }
+        playerInRange = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         menuIndicator.SetActive(false);
+        playerInRange = false;
     }
 }

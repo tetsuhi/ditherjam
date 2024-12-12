@@ -12,6 +12,7 @@ public class DoorInteraction : MonoBehaviour
     [SerializeField]
     private GameObject playerInventory;
     private PlayerInventoryManager playerInventoryManager;
+    private bool playerInRange;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class DoorInteraction : MonoBehaviour
 
     private void OpenDoor()
     {
-        if(doorRequirementIndicator.activeInHierarchy && Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) && playerInRange)
         {
             int ingredientInventoryIndex = playerInventoryManager.FindItemByName(ingredientRequiredName);
             if (ingredientInventoryIndex != -1)
@@ -41,6 +42,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if (collision.name is "Player")
         {
+            playerInRange = true;
             doorRequirementIndicator.GetComponent<SpriteRenderer>().sprite = ingredientRequired.GetComponent<Ingredient>().GetSprite().sprite;
             doorRequirementIndicator.SetActive(true);
         }
@@ -50,6 +52,7 @@ public class DoorInteraction : MonoBehaviour
     {
         if (collision.name is "Player")
         {
+            playerInRange = false;
             doorRequirementIndicator.SetActive(false);
         }
     }

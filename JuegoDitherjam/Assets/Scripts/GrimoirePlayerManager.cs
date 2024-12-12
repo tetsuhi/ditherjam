@@ -22,14 +22,7 @@ public class GrimoirePlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q) && player.GetPlayerMove() && !alchemyMenu.activeInHierarchy)
         {
-            if (!grimoireMenu.activeInHierarchy)
-            {
-                transform.GetChild(0).GetComponent<AudioSource>().Play();
-            }
-            else
-            {
-                transform.GetChild(1).GetComponent<AudioSource>().Play();
-            }
+            transform.GetChild(0).GetComponent<AudioSource>().Play();
             grimoireMenu.SetActive(!grimoireMenu.activeInHierarchy);
             player.SetOpenedMenu(grimoireMenu.activeInHierarchy);
         }

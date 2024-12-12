@@ -56,8 +56,6 @@ public class UIAlchemyManager : MonoBehaviour
 
         if (playerFluid)
         {
-            GameObject.FindGameObjectWithTag("Player")
-            .GetComponentInChildren<AlchemyPlayerManager>().SpendFluid();
             CheckResultantComponent(firstIngredientMix.GetComponent<AlchemyIngredientSlot>().GetIngredientName()
                 , secondIngredientMix.GetComponent<AlchemyIngredientSlot>().GetIngredientName());
         }
@@ -83,6 +81,8 @@ public class UIAlchemyManager : MonoBehaviour
             resultMix.transform.GetChild(0).GetComponent<Image>().enabled = true;
             DeleteIngredients();
             transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
+            GameObject.FindGameObjectWithTag("Player")
+            .GetComponentInChildren<AlchemyPlayerManager>().SpendFluid();
         }
 
         if ((firstIngredientName == "Plátano" && secondIngredientName == "Piña")
@@ -99,6 +99,8 @@ public class UIAlchemyManager : MonoBehaviour
             resultMix.transform.GetChild(0).GetComponent<Image>().enabled = true;
             DeleteIngredients();
             transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
+            GameObject.FindGameObjectWithTag("Player")
+            .GetComponentInChildren<AlchemyPlayerManager>().SpendFluid();
         }
     }
 

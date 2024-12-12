@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
         targetVelocity = direction * speed;
-        if(direction != new Vector2(0, 0))
+        if(direction.Equals(new Vector2(0, 0)))
         {
             footstepsAudioSource.GetComponent<AudioSource>().Play();
         }
