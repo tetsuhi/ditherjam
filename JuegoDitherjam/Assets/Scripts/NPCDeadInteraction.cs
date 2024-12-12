@@ -44,6 +44,7 @@ public class NPCDeadInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && menuIndicator.activeInHierarchy)
         {
+            transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
             if (lootMenu.activeInHierarchy && canReceiveIngredient)
             {
                 GameObject deadGuyInventoryItem = transform.parent.GetComponent<PlayerInventoryManager>().GetFirstItem();
@@ -60,11 +61,6 @@ public class NPCDeadInteraction : MonoBehaviour
             lootMenu.SetActive(!lootMenu.activeInHierarchy);
         }
     }
-
-    //private void TimerEnded()
-    //{
-    //    canReceiveIngredient = true;
-    //}
 
     private void RestartTimer()
     {

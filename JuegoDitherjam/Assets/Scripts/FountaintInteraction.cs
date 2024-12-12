@@ -45,6 +45,7 @@ public class FountaintInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && menuIndicator.activeInHierarchy && canReceiveFluid)
         {
+            transform.GetChild(0).GetComponent<AudioSource>().Play();
             canReceiveFluid = false;
             RestartTimer();
             player.GetComponentInChildren<AlchemyPlayerManager>().AddFluid();

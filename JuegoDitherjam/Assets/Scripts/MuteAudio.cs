@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class MuteAudio : MonoBehaviour
 {
-    [SerializeField]
-    private bool muted = false;
-
     public void Mute()
     {
-        muted = !muted;
-
-        if (muted)
+        if (AudioListener.volume == 1)
         {
             AudioListener.volume = 0;
         }

@@ -43,6 +43,7 @@ public class ChaseCharacter : MonoBehaviour
             print(random);
             if (random == 0)
             {
+                transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
                 isChasing = true;
             }
         }
@@ -52,6 +53,7 @@ public class ChaseCharacter : MonoBehaviour
     {
         if (collision.name is "Player")
         {
+            transform.parent.GetChild(2).GetComponent<AudioSource>().Stop();
             isChasing = false;
         }
     }

@@ -82,6 +82,7 @@ public class UIAlchemyManager : MonoBehaviour
                 .SetPrefab(resultsList[0]);
             resultMix.transform.GetChild(0).GetComponent<Image>().enabled = true;
             DeleteIngredients();
+            transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
         }
 
         if ((firstIngredientName == "Plátano" && secondIngredientName == "Piña")
@@ -97,6 +98,7 @@ public class UIAlchemyManager : MonoBehaviour
                 .SetPrefab(resultsList[1]);
             resultMix.transform.GetChild(0).GetComponent<Image>().enabled = true;
             DeleteIngredients();
+            transform.parent.GetChild(2).GetComponent<AudioSource>().Play();
         }
     }
 
